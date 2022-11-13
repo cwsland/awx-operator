@@ -14,9 +14,9 @@ jobs:
           IMG=awx-operator:devel BUILD_ARGS='--platform linux/arm64' make docker-build
       - name: Login to registry
         run: |
-          sudo docker login ${{ secrets.REGISTRY_URL }} --username ${{ secrets.REGISTRY_USER }} --password  ${{ secrets.REGISTRY_PASS }}
+          docker login ${{ secrets.REGISTRY_URL }} --username ${{ secrets.REGISTRY_USER }} --password  ${{ secrets.REGISTRY_PASS }}
 
       - name: Push image to registry
         run: |
-          sudo docker image push harbor.cws.land/ansible/awx-operator:devel
+          docker image push harbor.cws.land/ansible/awx-operator:devel
 
