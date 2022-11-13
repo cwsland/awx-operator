@@ -20,3 +20,4 @@ jobs:
           registry: harbor.cws.land/ansible/
           username: ${{ secrets.REGISTRY_USER }}
           password: ${{ secrets.REGISTRY_PASS }}
+
