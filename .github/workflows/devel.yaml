@@ -12,6 +12,9 @@ jobs:
       - name: Build Image
         run: |
           IMG=awx-operator:devel BUILD_ARGS='--platform linux/arm64' make docker-build
+      - name: install podmanm
+        run: |
+          sudo apt-get -y install podman
       - name: Push To Quay
         uses: redhat-actions/push-to-registry@v2.1.1
         with:
