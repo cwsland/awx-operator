@@ -12,16 +12,11 @@ jobs:
       - name: Build Image
         run: |
           IMG=awx-operator:devel BUILD_ARGS='--platform linux/arm64' make docker-build
-      - name: install podman
+      - name: Login to registry
         run: |
-          sudo apt-get update
-          sudo apt-get -y install podman
-      - name: Push To Quay
-        uses: redhat-actions/push-to-registry@v2.1.1
-        with:
-          image: awx-operator
-          tags: devel
-          registry: harbor.cws.land/ansible/
-          username: ${{ secrets.REGISTRY_USER }}
-          password: ${{ secrets.REGISTRY_PASS }}
+          sudo docker login ${{ secrets.REGISTRY_URL }} --username ${{ secrets.REGISTRY_USER }} --password  ${{ secrets.REGISTRY_PASS }}
+
+      - name: Push image to registry
+        run: |
+          sudo docker image push harbor.cws.land/ansible/awx-operator:devel
 
