@@ -9,12 +9,12 @@ jobs:
     name: Push devel image
     steps:
       - uses: actions/checkout@v2
-      - name: Build Image
-        run: |
-          IMG=awx-operator:devel BUILD_ARGS='--platform linux/arm64' make docker-build
       - name: Login to registry
         run: |
           echo ${{ secrets.REGISTRY_PASS }} | docker login ${{ secrets.REGISTRY_URL }} -u ${{ secrets.REGISTRY_USER }} --password-stdin
+      - name: Build Image
+        run: |
+          IMG=awx-operator:devel BUILD_ARGS='--platform linux/arm64' make docker-build
       - name: Push image to registry
         run: |
           docker image push harbor.cws.land/ansible/awx-operator:devel
