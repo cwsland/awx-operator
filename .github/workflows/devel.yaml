@@ -17,5 +17,6 @@ jobs:
           IMG=awx-operator:devel BUILD_ARGS='--platform linux/arm64' make docker-build
       - name: Push image to registry
         run: |
+          docker image tag awx-operator:devel harbor.cws.land/ansible/awx-operator:devel
           docker image push harbor.cws.land/ansible/awx-operator:devel
 
